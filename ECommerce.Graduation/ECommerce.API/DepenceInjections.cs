@@ -1,6 +1,9 @@
 ﻿using ECommerce.Domain.Models;
 using ECommerce.Infrastructure.Configuration;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace ECommerce.API
 {
@@ -12,6 +15,7 @@ namespace ECommerce.API
             services.AddDatabase(configuration);
             services.AddGlobalExceptionHandler();
             services.AddCorsBroswer();
+            services.AddFluentValidation();
             return services;
         }
 
@@ -53,6 +57,13 @@ namespace ECommerce.API
                     .AllowAnyOrigin();
                 });
             });
+            return services;
+        }
+        private static IServiceCollection AddFluentValidation(this IServiceCollection services)
+        {
+            services
+                .AddFluentValidationAutoValidation()
+                .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             return services;
         }
     }
