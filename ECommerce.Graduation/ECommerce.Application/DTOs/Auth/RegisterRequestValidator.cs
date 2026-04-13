@@ -1,5 +1,4 @@
 ﻿using ECommerce.Application.DTOs.Auth.Regex;
-using ECommerce.Application.Regex;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
