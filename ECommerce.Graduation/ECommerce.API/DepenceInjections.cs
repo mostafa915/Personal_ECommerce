@@ -1,4 +1,5 @@
-﻿using ECommerce.Application.Authentication;
+﻿using ECommerce.Application;
+using ECommerce.Application.Authentication;
 using ECommerce.Application.IRepos;
 using ECommerce.Application.Services;
 using ECommerce.Domain.Models;
@@ -55,7 +56,8 @@ namespace ECommerce.API
             services.AddScoped<IAuthRepo, AuthRepo>();
             services.AddScoped<IJwt, Jwt>();
             services.AddScoped<IAuthService, AuthService>();
-            
+            services.AddScoped<ICategoryService, CategoryService>();    
+            services.AddScoped<ICategoryRepo, CategoryRepo>();  
             return services;
         }
 
@@ -139,7 +141,7 @@ namespace ECommerce.API
         {
 
             var mappingConfing = TypeAdapterConfig.GlobalSettings;
-            mappingConfing.Scan(Assembly.GetExecutingAssembly());
+            mappingConfing.Scan(typeof(IApplicationMarker).Assembly);
             services.AddSingleton<IMapper>(new Mapper(mappingConfing));
             return services;
         }
