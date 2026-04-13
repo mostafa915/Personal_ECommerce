@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -23,7 +24,7 @@ namespace ECommerce.API
     {
         public static IServiceCollection AddDepnces(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddOpenApi();
+            services.AddOPAi();
             services.AddDatabase(configuration);
             services.AddGlobalExceptionHandler();
             services.AddCorsBroswer();
@@ -34,6 +35,36 @@ namespace ECommerce.API
             return services;
         }
 
+
+        private static IServiceCollection AddOPAi(this IServiceCollection services)
+        {
+            services.AddOpenApi(options =>
+            {
+                options.AddDocumentTransformer((document, context, cancellationToken) =>
+                {
+                    var scheme = new OpenApiSecurityScheme
+                    {
+                        Type = SecuritySchemeType.Http,
+                        Name = "Authorization",
+                        In = ParameterLocation.Header,
+                        Scheme = "bearer",
+                        BearerFormat = "JWT",
+                        Description = "Beare Token"
+                    };
+
+                    document.Components ??= new OpenApiComponents();
+                    document.Components.SecuritySchemes.Add("Bearer", scheme);
+
+                    document.SecurityRequirements.Add(new OpenApiSecurityRequirement
+                    {
+                        [new OpenApiSecurityScheme { Reference = new OpenApiReference { Id = "Bearer", Type = ReferenceType.SecurityScheme } }] = Array.Empty<string>()
+                    });
+
+                    return Task.CompletedTask;
+                });
+            });
+            return services;
+        }
 
         private static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
         {
