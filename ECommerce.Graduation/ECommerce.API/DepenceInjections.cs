@@ -58,6 +58,8 @@ namespace ECommerce.API
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICategoryService, CategoryService>();    
             services.AddScoped<ICategoryRepo, CategoryRepo>();  
+            services.AddScoped<IBrandRepo, BrandRepo>();
+            services.AddScoped<IBrandService, BrandService>();
             return services;
         }
 
