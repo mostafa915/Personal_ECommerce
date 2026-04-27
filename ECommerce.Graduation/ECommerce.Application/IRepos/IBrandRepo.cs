@@ -18,6 +18,8 @@ namespace ECommerce.Application.IRepos
         void Update(Brand brand);
         Task<bool> AnyHasName(int id, string name, CancellationToken cancellationToken);
         Task<bool> AnyHasName(string name, CancellationToken cancellationToken);
+        Task<bool> AnyAsyncHasId(int id, CancellationToken cancellationToken);
+        Task<bool> AnyAsyncHasIdAndAvailable(int id, CancellationToken cancellationToken);
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

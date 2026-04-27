@@ -39,6 +39,12 @@ namespace ECommerce.Infrastructure.Repos
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken) =>
             await _context.SaveChangesAsync(cancellationToken);
 
+        public async Task<bool> AnyAsyncHasId(int id, CancellationToken cancellationToken) =>
+            await _context.Brands.AnyAsync(x => x.Id == id, cancellationToken);
+
+        public async Task<bool> AnyAsyncHasIdAndAvailable(int id, CancellationToken cancellationToken) =>
+            await _context.Brands.AnyAsync(x => x.IsAvailable && x.Id == id, cancellationToken);    
+
         public void Update(Brand brand) =>
             _context.Update(brand);
     }

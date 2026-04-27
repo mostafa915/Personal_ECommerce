@@ -11,6 +11,7 @@ namespace ECommerce.Domain.Models
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = String.Empty;
+        public Cart Cart { get; set; } = default!;
         public List<RefreshToken> RefreshTokens { get; set; } = [];
     }
 }

@@ -19,6 +19,8 @@ namespace ECommerce.Application.IRepos
         Task<bool> AnyHasNameAndAvailable(string name, CancellationToken cancellationToken);
         Task AddAsync(Category category, CancellationToken cancellationToken);
         void Update(Category category);
+        Task<bool> AnyAsyncHasId(int id, CancellationToken cancellationToken);
+        Task<bool> AnyAsyncHasIdAndAvailable(int id, CancellationToken cancellationToken);
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

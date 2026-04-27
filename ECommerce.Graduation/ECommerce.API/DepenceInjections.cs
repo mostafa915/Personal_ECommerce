@@ -91,6 +91,12 @@ namespace ECommerce.API
             services.AddScoped<ICategoryRepo, CategoryRepo>();  
             services.AddScoped<IBrandRepo, BrandRepo>();
             services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepo, ProductRepo>();
+            services.AddScoped<ICartRepo, CartRepo>();
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IOrderRepo, OrderRepo>();
+            services.AddScoped<IOrderService, OrderService>();
             return services;
         }
 

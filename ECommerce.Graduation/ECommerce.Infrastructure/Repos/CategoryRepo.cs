@@ -49,5 +49,11 @@ namespace ECommerce.Infrastructure.Repos
 
         public async Task<Category?> GetAvaliableByIdAsync(int id, CancellationToken cancellationToken) =>
             await _context.Categories.SingleOrDefaultAsync(x => x.Id == id && x.IsAvailable, cancellationToken);
+
+        public async Task<bool> AnyAsyncHasId(int id, CancellationToken cancellationToken) =>
+            await _context.Categories.AnyAsync(x => x.Id == id, cancellationToken);
+
+        public async Task<bool> AnyAsyncHasIdAndAvailable(int id, CancellationToken cancellationToken) =>
+            await _context.Categories.AnyAsync(x => x.IsAvailable && x.Id == id, cancellationToken);    
     }
 }
