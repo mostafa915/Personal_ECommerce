@@ -13,5 +13,6 @@ namespace ECommerce.Domain.Models
         public string LastName { get; set; } = String.Empty;
         public Cart Cart { get; set; } = default!;
         public List<RefreshToken> RefreshTokens { get; set; } = [];
+        public ICollection<Review> Reviews { get; set; } = [];
     }
 }

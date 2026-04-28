@@ -1,4 +1,5 @@
 ﻿using ECommerce.Application.DTOs.Products;
+using ECommerce.Application.DTOs.Reviews;
 using ECommerce.Domain.Models;
 using Mapster;
 using System;
@@ -16,6 +17,9 @@ namespace ECommerce.Application.Mapping
             config.NewConfig<Product, ProductResponse>()
                 .Map(x => x.BrandName, y => y.Brand.Name)
                 .Map(x => x.CategoryName, y => y.Category.Name);
+
+            config.NewConfig<Review, UserReviewResponse>()
+                .Map(x => x.UserName, y => y.User.FirstName + " " + y.User.LastName);
         }
     }
 }

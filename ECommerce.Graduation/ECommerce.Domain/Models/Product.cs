@@ -20,5 +20,7 @@ namespace ECommerce.Domain.Models
         public Category Category { get; set; } = default!;
         public ICollection<CartItem> cartItems { get; set; } = [];
         public ICollection<OrderItem> OrderItems { get; set; } = [];
+        public ICollection<Review> Reviews { get; set; } = [];
+
     }
 }
