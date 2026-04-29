@@ -99,6 +99,7 @@ namespace ECommerce.API
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IReviewRepo , ReviewRepo>();
             services.AddScoped<IReviewService , ReviewService>();
+            services.AddScoped<IUserMangerService, UserMangerService>();
             return services;
         }
 
