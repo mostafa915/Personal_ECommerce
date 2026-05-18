@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Application.Services
 {
-    public class ProductService(IProductRepo productRepo, IBrandRepo brandRepo, ICategoryRepo categoryRepo) : IProductService
+    public class ProductService(IProductRepo productRepo, IBrandRepo brandRepo, ICategoryRepo categoryRepo, IImageService imageService) : IProductService
     {
         private readonly IProductRepo _productRepo = productRepo;
         private readonly IBrandRepo _brandRepo = brandRepo;
         private readonly ICategoryRepo _categoryRepo = categoryRepo;
+        private readonly IImageService _imageService = imageService;
 
-        
         public async Task<Result<IEnumerable<ProductResponse>>> GetAllAsync(string? search ,int? categoryId, int? brandId, CancellationToken cancellationToken)
         {
             var products = await _productRepo.GetAllAsync(cancellationToken);
@@ -112,6 +112,9 @@ namespace ECommerce.Application.Services
                 return Result.Faliuar<ProductResponse>(ProductsError.DuplicateProductName);
 
             var product = request.Adapt<Product>();
+            var image = await _imageService.UploadAsync(request.Image);
+            product.ImageUrl = image.ImageUrl;
+            product.ImageId = image.PublicId;
             await _productRepo.AddAsync(product, cancellationToken);
             await _productRepo.SaveChangesAsync(cancellationToken);
 
@@ -128,6 +131,15 @@ namespace ECommerce.Application.Services
                 return Result.Faliuar(ProductsError.DuplicateProductName);
 
              product = request.Adapt(product);
+                
+            if (request.Image is not null)
+            {
+                await _imageService.DeleteAsync(product.ImageId);
+                var imageResult = await _imageService.UploadAsync(request.Image);
+                
+                product.ImageUrl = imageResult.ImageUrl;
+                product.ImageId = imageResult.PublicId;
+            }
 
             _productRepo.Update(product);
             await _productRepo.SaveChangesAsync(cancellationToken);

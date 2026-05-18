@@ -15,6 +15,8 @@ namespace ECommerce.Application.DTOs.Products
         int BrandId,
         string BrandName,
         int CategoryId,
-        string CategoryName
+        string CategoryName,
+        string ImageUrl,
+        string ImageId
         );
 }

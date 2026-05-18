@@ -58,7 +58,7 @@ namespace ECommerce.API.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost("")]
-        public async Task<IActionResult> Create([FromBody] ProductRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create([FromForm] ProductRequest request, CancellationToken cancellationToken)
         {
             var result = await _productService.CreateAsync(request, cancellationToken);
             return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
@@ -68,7 +68,7 @@ namespace ECommerce.API.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id, UpdateProductRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update([FromRoute] int id, [FromForm] UpdateProductRequest request, CancellationToken cancellationToken)
         {
             var result = await _productService.UpdateAsync(id, request, cancellationToken);
             return result.IsSuccess ? NoContent() : result.ToProblem(); 

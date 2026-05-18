@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using ECommerce.Application.DTOs.Images;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,9 @@ namespace ECommerce.Application.DTOs.Products
 
             RuleFor(x => x.Price)
                 .GreaterThan(0);
+
+            RuleFor(x => x.Image)
+                .SetValidator(new UploadImageRequestValidator());
 
             
         }

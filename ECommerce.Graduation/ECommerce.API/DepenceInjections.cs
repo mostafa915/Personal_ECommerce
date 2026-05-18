@@ -92,6 +92,7 @@ namespace ECommerce.API
             services.AddScoped<IBrandRepo, BrandRepo>();
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IImageService, CloudinaryService>();
             services.AddScoped<IProductRepo, ProductRepo>();
             services.AddScoped<ICartRepo, CartRepo>();
             services.AddScoped<ICartService, CartService>();
@@ -102,6 +103,7 @@ namespace ECommerce.API
             services.AddScoped<IUserMangerService, UserMangerService>();
             return services;
         }
+
 
         private static IServiceCollection AddGlobalExceptionHandler(this IServiceCollection services)
         {

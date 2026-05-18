@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace ECommerce.Application.DTOs.Products
     public record UpdateProductRequest(
         string Name,
         string Description,
-        decimal Price
+        decimal Price,
+        IFormFile? Image
         );
 }

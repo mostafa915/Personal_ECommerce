@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,8 @@ namespace ECommerce.Application.DTOs.Products
         string Name,
         string Description,
         decimal Price,
-        int QuantityAvailable
+        int QuantityAvailable,
+        IFormFile Image
         );
     
 }

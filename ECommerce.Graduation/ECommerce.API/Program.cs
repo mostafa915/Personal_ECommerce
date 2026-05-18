@@ -1,4 +1,5 @@
 using ECommerce.API;
+using ECommerce.Application.Settings;
 using Scalar.AspNetCore;
 using Serilog;
 
@@ -21,6 +22,11 @@ builder.Host.UseSerilog((context, configuration) =>
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 
 builder.Services.AddDepnces(builder.Configuration);
+
+//Add Colundinary
+builder.Services.Configure<CloudinarySettings>(
+builder.Configuration.GetSection("CloudinarySettings"));
+
 
 var app = builder.Build();
 

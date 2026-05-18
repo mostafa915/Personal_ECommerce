@@ -38,7 +38,9 @@ namespace ECommerce.Infrastructure.Repos
                     x.BrandId,
                     x.Brand.Name,
                     x.CategoryId,
-                    x.Category.Name
+                    x.Category.Name,
+                    x.ImageUrl,
+                    x.ImageId
                 )
                 )
                 .AsNoTracking()
@@ -61,7 +63,9 @@ namespace ECommerce.Infrastructure.Repos
                     x.BrandId,
                     x.Brand.Name,
                     x.CategoryId,
-                    x.Category.Name
+                    x.Category.Name,
+                    x.ImageUrl,
+                    x.ImageId
                 )
                 )
                 .AsNoTracking()

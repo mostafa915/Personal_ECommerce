@@ -16,6 +16,8 @@ namespace ECommerce.Domain.Models
         public int BrandId { get; set; }
         public int CategoryId { get; set; }
         public bool IsAvailable { get; set; } = true;
+        public string ImageUrl { get; set; } = string.Empty;
+        public string ImageId { get; set; } = string.Empty;
         public Brand Brand { get; set; } = default!;
         public Category Category { get; set; } = default!;
         public ICollection<CartItem> cartItems { get; set; } = [];
